@@ -1,11 +1,11 @@
 <template>
   <div>
     <main>
-      <h1 class="h3 mb-0 text-gray-800">Member</h1>
+      <h1 class="h3 mb-0 text-gray-800">User</h1>
       <div class="card mt-4 mb-4">
         <div class="card-body">
           <a
-            v-b-modal.modal_member
+            v-b-modal.modal_user
             href="#"
             class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
             @click="Add"
@@ -26,41 +26,36 @@
                 <tr>
                   <th>#</th>
                   <th>Nama</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Telepon</th>
-                  <th>Alamat</th>
+                  <th>Username</th>
+                  <th>Role</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Nama</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Telepon</th>
-                  <th>Alamat</th>
-                  <th>Aksi</th>
-                </tr>
+                <th>#</th>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Aksi</th>
               </tfoot>
               <tbody>
-                <tr v-for="(mem, index) in member" :key="index">
+                <tr v-for="(ket, index) in paket" :key="index">
                   <td>{{ index + 1 }}</td>
-                  <td>{{ mem.nama }}</td>
-                  <td>{{ mem.jenis_kelamin }}</td>
-                  <td>{{ mem.telp }}</td>
-                  <td>{{ mem.alamat }}</td>
+                  <td>{{ ket.nama }}</td>
+                  <td>{{ ket.username }}</td>
+                  <td>{{ ket.role }}</td>
                   <td>
                     <a
-                      v-b-modal.modal_member
+                      v-b-modal.modal_user
                       href="#"
                       class="btn bg-gradient-primary text-light mr-2"
-                      @click="Edit(mem)"
+                      @click="Edit(ket)"
                       >Ubah</a
                     >
                     <a
                       href="#"
                       class="btn btn-danger"
-                      @click="Delete(mem.id_member)"
+                      @click="Delete(ket.id_paket)"
                     >
                       <i class="fas fa-fw fa-trash"></i
                     ></a>
@@ -74,9 +69,9 @@
     </main>
 
     <b-modal
-      id="modal_member"
+      id="modal_user"
       ref="modal"
-      title="Form Member"
+      title="Form Paket"
       size="md"
       @ok="Save"
     >
@@ -88,10 +83,10 @@
             </span>
           </div>
           <input
-            v-model="nama"
+            v-model="jenis_paket"
             type="text"
             class="form-control"
-            placeholder="Masukkan Nama"
+            placeholder="Masukkan Jenis Paket"
             aria-label="Nama"
             aria-describedby="basic-addon1"
           />
@@ -99,45 +94,17 @@
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
-              <i class="fas fa-mobile-alt"></i>
+              <i class="fas fa-tag"></i>
             </span>
           </div>
           <input
-            v-model="telp"
+            v-model="harga"
             type="number"
             class="form-control"
-            placeholder="Masukkan Telpon"
-            aria-label="Telpon"
+            placeholder="Masukkan Harga"
+            aria-label="Nama"
             aria-describedby="basic-addon1"
           />
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-              <i class="fas fa-venus-mars"></i>
-            </span>
-          </div>
-          <select v-model="jenis_kelamin" class="form-control">
-            <option selected value="">-- Pilih Jenis Kelamin --</option>
-            <option value="l">Laki-Laki</option>
-            <option value="p">Perempuan</option>
-          </select>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-              <i class="fas fa-map-marker-alt"></i>
-            </span>
-          </div>
-          <textarea
-            v-model="alamat"
-            type="text"
-            class="form-control"
-            id="exampleInputNama"
-            aria-describedby="namaHelp"
-            placeholder="Masukkan Alamat"
-          >
-          </textarea>
         </div>
       </form>
     </b-modal>
@@ -145,18 +112,21 @@
 </template>
 <script>
 module.exports = {
+  // Initial State
   data: function () {
     return {
-      id_member: "",
+      id_outlet: "",
       nama: "",
-      jenis_kelamin: "",
-      telp: "",
-      alamat: "",
-      member: [],
+      username: "",
+      password: "",
+      role: "",
+      user: [],
+      outlet: [],
       aksi: "",
     };
   },
   methods: {
+    // Pengecekan Token | isHaveCookiesToken?
     getData: function () {
       let config = {
         headers: {
@@ -164,29 +134,32 @@ module.exports = {
         },
       };
 
-      axios.get(base_url + "/member", config).then((response) => {
+      // Get Data Section | Ditampilkan Ke Tabel Nantinya
+      axios.get(base_url + "/paket", config).then((response) => {
         console.log(response);
         if (response.data.success == true) {
-          this.member = response.data.data.member;
+          this.paket = response.data.data.paket;
         }
       });
     },
+
+    // Insert Section | To Change Pop Up Action to Insert Method
     Add: function () {
       this.action = "insert";
-      this.id_member = "";
-      this.nama = "";
-      this.jenis_kelamin = "";
-      this.telp = "";
-      this.alamat = "";
+      this.id_paket = "";
+      this.jenis_paket = "";
+      this.harga = "";
     },
+
+    // Insert Section | To Change Pop Up Action to Update Method
     Edit: function (item) {
       this.action = "update";
-      this.id_member = item.id_member;
-      this.nama = item.nama;
-      this.jenis_kelamin = item.jenis_kelamin;
-      this.telp = item.telp;
-      this.alamat = item.alamat;
+      this.id_paket = item.id_paket;
+      this.jenis_paket = item.jenis_paket;
+      this.harga = item.harga;
     },
+
+    // Save Method | Used to Button @click
     Save: function () {
       let config = {
         headers: {
@@ -195,21 +168,19 @@ module.exports = {
       };
 
       let form = {
-        nama: this.nama,
-        alamat: this.alamat,
-        jenis_kelamin: this.jenis_kelamin,
-        telp: this.telp,
+        jenis_paket: this.jenis_paket,
+        harga: this.harga,
       };
 
-      //logika method post/get (insert /update)
+      // Post Section
       if (this.action == "insert") {
-        axios.post(base_url + "/member", form, config).then((response) => {
+        axios.post(base_url + "/paket", form, config).then((response) => {
           alert(response.data.message);
         });
       } else {
-        //update
+        // Update Section
         axios
-          .put(base_url + "/member/" + this.id_member, form, config)
+          .put(base_url + "/paket/" + this.id_paket, form, config)
           .then((response) => {
             alert(response.data.message);
           });
@@ -217,15 +188,16 @@ module.exports = {
 
       this.getData();
     },
+
     Delete: function (id) {
-      if (confirm("Apakah anda yakin menghapus data member ini?")) {
+      if (confirm("Apakah anda yakin menghapus data paket ini?")) {
         let config = {
           headers: {
             Authorization: "Bearer " + this.$cookies.get("Authorization"),
           },
         };
 
-        axios.delete(base_url + "/member/" + id, config).then((response) => {
+        axios.delete(base_url + "/paket/" + id, config).then((response) => {
           alert(response.data.message);
         });
 

@@ -14,6 +14,9 @@
                     <p class="mb-4">
                       Login kembali untuk dapat mengakses Londri!
                     </p>
+                    <!-- <div class="alert alert-primary" role="alert">
+                      <strong>{{ message }}</strong>
+                    </div> -->
                   </div>
                   <form class="user" @submit.prevent="Login" method="post">
                     <div class="form-group">

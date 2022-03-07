@@ -1,50 +1,94 @@
 <template>
-  <div>
+  <div id="page-top">
     <div id="wrapper">
+      <!-- Sidebar -->
       <ul
         class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
+        <!-- Sidebar - Brand -->
         <a
           class="sidebar-brand d-flex align-items-center justify-content-center"
           href="index.html"
         >
           <div class="sidebar-brand-icon">
-            <img src="./src/assets/img/Favicon.svg" alt="Logo Londri" />
+            <img src="src/assets/img/Favicon.svg" alt="Logo Londri">
           </div>
-          <h4
-            class="sidebar-brand-text ml-2 mt-2 font-weight-bold text-capitalize"
-          >
-            Londri
-          </h4>
+          <div class="sidebar-brand-text mx-3">Londri</div>
         </a>
+
+        <!-- Divider -->
         <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
         <li class="nav-item">
           <router-link class="nav-link" to="/">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-archway mr-2"></i>
             <span>Dashboard</span>
           </router-link>
         </li>
+
+        <!-- Divider -->
         <hr class="sidebar-divider" />
+
+        <!-- Heading -->
         <div class="sidebar-heading">Interface</div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-          <router-link class="nav-link" to="/member">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+          <router-link class="nav-link" to="/member" v-if="role === 'admin'">
+            <i class="fas fa-users mr-2"></i>
             <span>Member</span>
           </router-link>
         </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link" to="/outlet" v-if="role === 'admin'">
+            <i class="fas fa-store mr-2"></i>
+            <span>Outlet</span>
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link" to="/paket" v-if="role === 'admin'">
+            <i class="fas fa-box mr-2"></i>
+            <span>Paket</span>
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link" to="/user" v-if="role === 'admin'">
+            <i class="fas fa-user mr-2"></i>
+            <span>User</span>
+          </router-link>
+        </li>
+        
+        <li class="nav-item">
+          <router-link class="nav-link" to="/userCoba" v-if="role === 'admin'">
+            <i class="fas fa-user mr-2"></i>
+            <span>User Coba</span>
+          </router-link>
+        </li>
       </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
         <div id="content">
+          <!-- Topbar -->
           <nav
             class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
           >
+            <!-- Sidebar Toggle (Topbar) -->
             <button
               id="sidebarToggleTop"
               class="btn btn-link d-md-none rounded-circle mr-3"
             >
               <i class="fa fa-bars"></i>
             </button>
+
+            <!-- Topbar Search -->
             <form
               class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
             >
@@ -63,7 +107,10 @@
                 </div>
               </div>
             </form>
+
+            <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
               <li class="nav-item dropdown no-arrow d-sm-none">
                 <a
                   class="nav-link dropdown-toggle"
@@ -76,6 +123,7 @@
                 >
                   <i class="fas fa-search fa-fw"></i>
                 </a>
+                <!-- Dropdown - Messages -->
                 <div
                   class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                   aria-labelledby="searchDropdown"
@@ -99,50 +147,74 @@
                 </div>
               </li>
 
+              <!-- Nav Item - Alerts -->
               <li class="nav-item dropdown no-arrow mx-1">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
-                  id="messagesDropdown"
+                  id="alertsDropdown"
                   role="button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i class="fas fa-envelope fa-fw"></i>
-                  <span class="badge badge-danger badge-counter">7</span>
+                  <i class="fas fa-bell fa-fw"></i>
+                  <!-- Counter - Alerts -->
+                  <span class="badge badge-danger badge-counter">3+</span>
                 </a>
+                <!-- Dropdown - Alerts -->
                 <div
                   class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                  aria-labelledby="messagesDropdown"
+                  aria-labelledby="alertsDropdown"
                 >
-                  <h6 class="dropdown-header">Message Center</h6>
+                  <h6 class="dropdown-header">Alerts Center</h6>
                   <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="dropdown-list-image mr-3">
-                      <img
-                        class="rounded-circle"
-                        src="https://source.unsplash.com/fn_BT9fwg_E/60x60"
-                        alt=""
-                      />
-                      <div class="status-indicator bg-success"></div>
-                    </div>
-                    <div class="font-weight-bold">
-                      <div class="text-truncate">
-                        Hi there! I am wondering if you can help me with a
-                        problem I've been having.
+                    <div class="mr-3">
+                      <div class="icon-circle bg-primary">
+                        <i class="fas fa-file-alt text-white"></i>
                       </div>
-                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">December 12, 2019</div>
+                      <span class="font-weight-bold"
+                        >A new monthly report is ready to download!</span
+                      >
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-success">
+                        <i class="fas fa-donate text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">December 7, 2019</div>
+                      $290.29 has been deposited into your account!
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-warning">
+                        <i class="fas fa-exclamation-triangle text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">December 2, 2019</div>
+                      Spending Alert: We've noticed unusually high spending for
+                      your account.
                     </div>
                   </a>
                   <a
                     class="dropdown-item text-center small text-gray-500"
                     href="#"
-                    >Read More Messages</a
+                    >Show All Alerts</a
                   >
                 </div>
               </li>
+
               <div class="topbar-divider d-none d-sm-block"></div>
 
+              <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
                 <a
                   class="nav-link dropdown-toggle"
@@ -153,15 +225,12 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span
-                    class="mr-2 d-none d-lg-inline text-capitalize text-gray-600 small font-weight-bold"
+                  <span class="mr-3 d-none d-lg-inline text-gray-600 small "
                     >{{ username }}</span
                   >
-                  <img
-                    class="img-profile rounded"
-                    src="https://source.unsplash.com/WNoLnJo7tS8/60x60"
-                  />
+                  <img class="rounded" src="https://source.unsplash.com/WNoLnJo7tS8/32x32">
                 </a>
+                <!-- Dropdown - User Information -->
                 <div
                   class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                   aria-labelledby="userDropdown"
@@ -194,26 +263,37 @@
               </li>
             </ul>
           </nav>
+          <!-- End of Topbar -->
 
+          <!-- Begin Page Content -->
           <div class="container-fluid">
-            <div class="mb-4">
-              <router-view></router-view>
-            </div>
-          </div>
+            <!-- Page Heading -->
+            <router-view></router-view>
+          <!-- /.container-fluid -->
         </div>
+        <!-- End of Main Content -->
+
+        
+      </div>
+      <!-- Footer -->
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Londri 2022</span>
+              <span>Template Ini &copy; Digunakan Rakha</span>
             </div>
           </div>
         </footer>
-      </div>
+        <!-- End of Footer -->
+      <!-- End of Content Wrapper -->
     </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Logout Modal-->
     <div
       class="modal fade"
       id="logoutModal"
@@ -246,7 +326,7 @@
             >
               Cancel
             </button>
-            <a class="btn btn-primary" @click="Logout" href="#">Logout</a>
+            <a @click="Logout" class="btn btn-primary" href="#">Logout</a>
           </div>
         </div>
       </div>
