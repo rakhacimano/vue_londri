@@ -44,13 +44,17 @@
                     <a
                       v-b-modal.modal_outlet
                       href="#"
-                      class="btn bg-gradient-primary text-light mr-2"
+                      class="btn btn-info btn-icon-split text-light mr-2"
                       @click="Edit(tlet)"
-                      >Ubah</a
                     >
+                      <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      <span class="text">Ubah Data</span>
+                    </a>
                     <a
                       href="#"
-                      class="btn btn-danger"
+                      class="btn btn-outline-danger"
                       @click="Delete(tlet.id_outlet)"
                     >
                       <i class="fas fa-fw fa-trash"></i

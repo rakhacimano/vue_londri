@@ -63,12 +63,6 @@
           </router-link>
         </li>
         
-        <li class="nav-item">
-          <router-link class="nav-link" to="/userCoba" v-if="role === 'admin'">
-            <i class="fas fa-user mr-2"></i>
-            <span>User Coba</span>
-          </router-link>
-        </li>
       </ul>
       <!-- End of Sidebar -->
 
@@ -360,7 +354,7 @@ module.exports = {
       this.$cookies.remove("Authorization");
       this.componentName = "login";
 
-      window.location == front_url;
+      document.location.href = "/vue_londri";
     },
   },
   mounted() {

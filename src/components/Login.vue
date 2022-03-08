@@ -14,9 +14,9 @@
                     <p class="mb-4">
                       Login kembali untuk dapat mengakses Londri!
                     </p>
-                    <!-- <div class="alert alert-primary" role="alert">
+                    <div class="alert alert-success" role="alert">
                       <strong>{{ message }}</strong>
-                    </div> -->
+                    </div>
                   </div>
                   <form class="user" @submit.prevent="Login" method="post">
                     <div class="form-group">
@@ -39,7 +39,7 @@
                       />
                     </div>
                     <button
-                      class="btn btn-primary btn-user btn-block font-weight-bold"
+                      class="btn btn-primary bg-gradient-primary btn-user btn-block font-weight-bold"
                     >
                       Login
                     </button>
@@ -66,7 +66,8 @@ module.exports = {
     return {
       username: "",
       password: "",
-      message: "",
+      message: "Login Yuk",
+      success: "",
     };
   },
   methods: {

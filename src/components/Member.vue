@@ -46,20 +46,36 @@
                 <tr v-for="(mem, index) in member" :key="index">
                   <td>{{ index + 1 }}</td>
                   <td>{{ mem.nama }}</td>
-                  <td>{{ mem.jenis_kelamin }}</td>
+                  <!-- <td>{{ mem.jenis_kelamin }}</td> -->
+                  <td class="text-white">
+                    <span
+                      v-if="mem.jenis_kelamin === 'l'"
+                      class="badge bg-gradient-primary"
+                      >Laki-Laki</span
+                    >
+                    <span
+                      v-if="mem.jenis_kelamin === 'p'"
+                      class="badge bg-danger"
+                      >Perempuan</span
+                    >
+                  </td>
                   <td>{{ mem.telp }}</td>
                   <td>{{ mem.alamat }}</td>
                   <td>
                     <a
                       v-b-modal.modal_member
                       href="#"
-                      class="btn bg-gradient-primary text-light mr-2"
+                      class="btn btn-info btn-icon-split text-light mr-2"
                       @click="Edit(mem)"
-                      >Ubah</a
                     >
+                      <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      <span class="text">Ubah Data</span>
+                    </a>
                     <a
                       href="#"
-                      class="btn btn-danger"
+                      class="btn btn-outline-danger"
                       @click="Delete(mem.id_member)"
                     >
                       <i class="fas fa-fw fa-trash"></i

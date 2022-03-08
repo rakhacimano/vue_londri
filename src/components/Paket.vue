@@ -4,7 +4,6 @@
       <h1 class="h3 mb-0 text-gray-800">Paket</h1>
       <div class="card mt-4 mb-4">
         <div class="card-body">
-
           <!-- Cause Enum Column for Jenis Paket, Add Button Disabled -->
           <!-- <a
             v-b-modal.modal_paket
@@ -49,14 +48,18 @@
                     <a
                       v-b-modal.modal_paket
                       href="#"
-                      class="btn bg-gradient-primary text-light mr-2"
+                      class="btn btn-info btn-icon-split text-light mr-2"
                       @click="Edit(ket)"
-                      >Ubah</a
                     >
+                      <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      <span class="text">Ubah Data</span>
+                    </a>
                     <a
                       href="#"
-                      class="btn btn-danger"
-                      @click="Delete(ket.id_paket)"
+                      class="btn btn-outline-danger"
+                      @click="Delete(tlet.id_paket)"
                     >
                       <i class="fas fa-fw fa-trash"></i
                     ></a>
