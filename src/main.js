@@ -28,9 +28,9 @@ var router = [
     component: httpVueLoader("./src/components/User.vue"),
   },
   {
-    path: "/userCoba",
-    name: "UserCoba",
-    component: httpVueLoader("./src/components/UserCoba.vue"),
+    path: "/transaksi",
+    name: "Transaksi",
+    component: httpVueLoader("./src/components/Transaksi.vue"),
   },
 ];
 
