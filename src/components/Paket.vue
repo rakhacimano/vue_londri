@@ -78,6 +78,8 @@
       title="Form Paket"
       size="md"
       @ok="Save"
+      ok-title="Tambah"
+      cancel-title="Batal"
     >
       <form>
         <div class="input-group mb-3">

@@ -95,6 +95,8 @@
       title="Form Member"
       size="md"
       @ok="Save"
+      ok-title="Tambah"
+      cancel-title="Batal"
     >
       <form>
         <div class="input-group mb-3">
@@ -145,15 +147,14 @@
               <i class="fas fa-map-marker-alt"></i>
             </span>
           </div>
-          <textarea
+          <input
             v-model="alamat"
             type="text"
             class="form-control"
             id="exampleInputNama"
             aria-describedby="namaHelp"
             placeholder="Masukkan Alamat"
-          >
-          </textarea>
+          />
         </div>
       </form>
     </b-modal>

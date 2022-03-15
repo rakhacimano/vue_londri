@@ -32,6 +32,11 @@ var router = [
     name: "Transaksi",
     component: httpVueLoader("./src/components/Transaksi.vue"),
   },
+  {
+    path: "/tambah-transaksi",
+    name: "TambahTransaksi",
+    component: httpVueLoader("./src/components/TambahTransaksi.vue"),
+  },
 ];
 
 var routers = new VueRouter({

@@ -4,9 +4,13 @@
       <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
       <a
         href="#"
-        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-        ><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a
+        class="btn bg-gradient-primary btn-icon-split text-light mr-2"
       >
+        <span class="icon text-white-50">
+          <i class="fas fa-download"></i>
+        </span>
+        <span class="text">Cetak Transaksi</span>
+      </a>
     </div>
     <div class="row mt-4">
       <div class="col-xl-3 col-md-6 mb-4">

@@ -77,7 +77,15 @@
       </div>
     </main>
 
-    <b-modal id="modal_user" ref="modal" title="Form User" size="md" @ok="Save">
+    <b-modal
+      id="modal_user"
+      ref="modal"
+      title="Form User"
+      size="md"
+      @ok="Save"
+      ok-title="Tambah"
+      cancel-title="Batal"
+    >
       <form>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
