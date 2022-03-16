@@ -23,7 +23,7 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
           <router-link class="nav-link" to="/">
-            <i class="fas fa-archway mr-2"></i>
+            <i class="fas fa-archway"></i>
             <span>Dashboard</span>
           </router-link>
         </li>
@@ -37,35 +37,35 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
           <router-link class="nav-link" to="/member" v-if="role === 'admin'">
-            <i class="fas fa-users mr-2"></i>
+            <i class="fas fa-users"></i>
             <span>Member</span>
           </router-link>
         </li>
 
         <li class="nav-item">
           <router-link class="nav-link" to="/outlet" v-if="role === 'admin'">
-            <i class="fas fa-store mr-2"></i>
+            <i class="fas fa-store"></i>
             <span>Outlet</span>
           </router-link>
         </li>
 
         <li class="nav-item">
           <router-link class="nav-link" to="/paket" v-if="role === 'admin'">
-            <i class="fas fa-box mr-2"></i>
+            <i class="fas fa-box"></i>
             <span>Paket</span>
           </router-link>
         </li>
 
         <li class="nav-item">
           <router-link class="nav-link" to="/user" v-if="role === 'admin'">
-            <i class="fas fa-user mr-2"></i>
+            <i class="fas fa-user"></i>
             <span>User</span>
           </router-link>
         </li>
 
         <li class="nav-item">
           <router-link class="nav-link" to="/transaksi" v-if="role === 'admin'">
-            <i class="fas fa-info-circle mr-2"></i>
+            <i class="fas fa-info-circle"></i>
             <span>Transaksi</span>
           </router-link>
         </li>
@@ -83,7 +83,19 @@
           >
 
             
-            <h4>{{ nama_outlet }}</h4>
+            <a
+              class="sidebar-brand d-flex align-items-center justify-content-center text-dark ml-2"
+              style="text-decoration: none"
+            >
+              <div class="sidebar-brand-icon">
+                <img class="outlet-logo" src="src/assets/img/Logo-Filled.svg" alt="Logo Londri">
+              </div>
+              <div class="sidebar-brand-text mx-2">
+                <h3 class="h5 mb-0 text-gray-900 font-weight-bold">
+                  {{ nama_outlet }}
+                </h3>
+              </div>
+            </a>
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">

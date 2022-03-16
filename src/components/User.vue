@@ -64,7 +64,7 @@
                     <a
                       href="#"
                       class="btn btn-outline-danger"
-                      @click="Delete(tlet.id_user)"
+                      @click="Delete(ser.id)"
                     >
                       <i class="fas fa-fw fa-trash"></i
                     ></a>
