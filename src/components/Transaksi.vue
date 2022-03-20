@@ -25,9 +25,11 @@
                     @change="getData($event)"
                     v-model="tahun"
                     :options="list_years"
-                  ></b-form-select>
+                  >
+                  </b-form-select>
                 </div>
               </div>
+
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <label for="tahun" class="col-form-label">Bulan</label>
@@ -42,11 +44,7 @@
             </div>
           </form>
           <div class="table-responsive">
-            <b-table
-              hover
-              :items="transaksi"
-              :fields="fields_transaksi"
-            >
+            <b-table hover :items="transaksi" :fields="fields_transaksi">
               <template v-slot:cell(status)="data">
                 <select
                   class="form-control"
@@ -225,7 +223,7 @@ module.exports = {
         .then((response) => {
           this.getData();
           this.message = response.data.message;
-          this.$bvToast.show("message");
+          alert(response.data.message);
         })
         .catch((error) => {
           console.log(error);
@@ -242,7 +240,7 @@ module.exports = {
         .then((response) => {
           this.getData();
           this.message = response.data.message;
-          this.$bvToast.show("message");
+          alert(response.data.message);
         })
         .catch((error) => {
           console.log(error);
@@ -255,7 +253,6 @@ module.exports = {
 
     Prints: function () {
       const prtHtml = document.getElementById("print").innerHTML;
-      //console.log(prtHtml);
       let stylesHtml = "";
       for (const node of [
         ...document.querySelectorAll('link[rel="stylesheet"], style'),
@@ -276,6 +273,7 @@ module.exports = {
           
         </head>
         <body>
+          <h1>Nota</h1>
           ${prtHtml}
         </body>
       </html>`);

@@ -193,7 +193,6 @@ module.exports = {
             .then((response2) => {
               if (response2.data.success == true) {
                 this.message = response2.data.message;
-                this.$bvToast.show("message");
 
                 this.id_user = "";
                 this.id_member = "";
@@ -203,7 +202,6 @@ module.exports = {
                 
               } else {
                 this.message = "Pastikan data terisi lengkap!.";
-                this.$bvToast.show("message");
               }
             })
             .catch((error) => {

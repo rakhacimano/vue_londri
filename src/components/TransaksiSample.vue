@@ -15,142 +15,167 @@
       </div>
       <div class="card mt-4 mb-4">
         <div class="card-body">
-          <div class="card-body">
-            <form>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">
-                    <label for="tahun" class="col-form-label">Tahun</label>
-                    <b-form-select
-                      class="form-control"
-                      @change="getData($event)"
-                      v-model="tahun"
-                      :options="list_years"
-                    ></b-form-select>
+          <form>
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-sun"></i>
+                    </span>
                   </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">
-                    <label for="tahun" class="col-form-label">Bulan</label>
-                    <b-form-select
-                      class="form-control"
-                      @change="getData($event)"
-                      v-model="bulan"
-                      :options="list_months"
-                    ></b-form-select>
-                  </div>
+                  <b-form-select
+                    class="form-control"
+                    @change="getData($event)"
+                    v-model="tahun"
+                    :options="list_years"
+                  ></b-form-select>
                 </div>
               </div>
-            </form>
-            <table class="table">
-              <tr>
-                <td>#</td>
-                <td>Nama Member</td>
-                <td>Tanggal</td>
-                <td>Status Cucian</td>
-                <td>Status Pembayaran</td>
-                <td>Tanggal Bayar</td>
-                <td>Kasir</td>
-                <td>Total</td>
-                <td>Aksi</td>
-              </tr>
-              <tr v-for="(saksi, index) in transaksi" :key="index">
-                <td>{{ index + 1 }}</td>
-                <td>{{ saksi.nama_member }}</td>
-                <td>{{ saksi.tanggal }}</td>
-                <td>
-                  <select
+              <div class="col-lg-6 col-md-6">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-moon"></i>
+                    </span>
+                  </div>
+                  <b-form-select
                     class="form-control"
-                    @change="changeStatus(saksi.id_transaksi, $event)"
+                    @change="getData($event)"
+                    v-model="bulan"
+                    :options="list_months"
+                  ></b-form-select>
+                </div>
+              </div>
+            </div>
+          </form>
+          <table class="table table-bordered" id="dataTable">
+            <tr>
+              <th>#</th>
+              <th>Nama Member</th>
+              <th>Tanggal</th>
+              <th>Status Cucian</th>
+              <th>Status Pembayaran</th>
+              <th>Tanggal Bayar</th>
+              <th>Kasir</th>
+              <th>Total</th>
+              <th>Aksi</th>
+            </tr>
+            <tr v-for="(saksi, index) in transaksi" :key="index">
+              <td>{{ index + 1 }}</td>
+              <td>{{ saksi.nama_member }}</td>
+              <td>{{ saksi.tanggal }}</td>
+              <td>
+                <select
+                  class="form-control"
+                  id="form_control_status_pembayaran"
+                  @change="changeStatus(saksi.id_transaksi, $event)"
+                >
+                  <option
+                    value="baru"
+                    v-if="saksi.status_cucian === 'baru'"
+                    :selected="saksi.status_cucian === 'baru'"
                   >
-                    <option
-                      value="baru"
-                      :selected="saksi.status_cucian === 'baru'"
-                    >
-                      Baru
-                    </option>
-                    <option
-                      value="proses"
-                      :selected="saksi.status_cucian === 'proses'"
-                    >
-                      Proses
-                    </option>
-                    <option
-                      value="selesai"
-                      :selected="saksi.status_cucian === 'selesai'"
-                    >
-                      Selesai
-                    </option>
-                    <option
-                      value="diambil"
-                      :selected="saksi.status_cucian === 'diambil'"
-                    >
-                      Diambil
-                    </option>
-                  </select>
-                </td>
-                <td>
-                  <select
-                    class="form-control"
-                    @change="changeBayar(saksi.id_transaksi, $event)"
+                    Baru
+                  </option>
+                  <option
+                    value="proses"
+                    :selected="saksi.status_cucian === 'proses'"
                   >
-                    <option
-                      value="dibayar"
-                      :selected="saksi.status_pembayaran === 'dibayar'"
-                    >
-                      Dibayar
-                    </option>
-                    <option
-                      value="belum_dibayar"
-                      :selected="saksi.status_pembayaran === 'belum_dibayar'"
-                    >
-                      Belum Dibayar
-                    </option>
-                  </select>
-                </td>
-                <td>{{ saksi.tanggal_bayar }}</td>
-                <td>{{ saksi.kasir }}</td>
-                <td>{{ saksi.total }}</td>
-                <td>
-                  <a
-                    v-b-modal.modal_detail
-                    href="#"
-                    class="btn btn-warning"
-                    @click="detail(saksi.detail_transaksi, saksi.total)"
+                    Proses
+                  </option>
+                  <option
+                    value="selesai"
+                    :selected="saksi.status_cucian === 'selesai'"
                   >
-                    <i class="fa-solid fa-circle-info"></i>
-                  </a>
-                </td>
-              </tr>
-            </table>
-          </div>
+                    Selesai
+                  </option>
+                  <option
+                    value="diambil"
+                    :selected="saksi.status_cucian === 'diambil'"
+                  >
+                    Diambil
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select
+                  class="form-control"
+                  @change="changeBayar(saksi.id_transaksi, $event)"
+                >
+                  <option
+                    value="dibayar"
+                    :selected="saksi.status_pembayaran === 'dibayar'"
+                  >
+                    Dibayar
+                  </option>
+                  <option
+                    value="belum_dibayar"
+                    :selected="saksi.status_pembayaran === 'belum_dibayar'"
+                  >
+                    Belum Dibayar
+                  </option>
+                </select>
+              </td>
+              <td>{{ saksi.tanggal_bayar }}</td>
+              <td>{{ saksi.kasir }}</td>
+              <td>{{ saksi.total }}</td>
+              <td>
+                <a
+                  v-b-modal.modal_detail
+                  href="#"
+                  class="btn btn-warning"
+                  @click="detail(saksi.detail_transaksi, saksi.total)"
+                >
+                  <i class="fas fa-eye"></i>
+                </a>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </main>
 
     <b-modal
-      id="modal-detail"
+      id="modal_detail"
       ref="modal"
       title="Detail Transaksi"
-      size="md"
+      size="lg"
       hide-footer="true"
     >
-      <a href="#" @click="Prints()">print</a>
+      <a
+        href="#"
+        @click="cetak()"
+        class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
+      >
+        <span class="icon text-white-50">
+          <i class="fas fa-print"></i>
+        </span>
+        <span class="text">Print Struk</span>
+      </a>
       <div class="table-responsive table table-stripped" id="print">
-        <b-table
-          striped
-          hover
-          :items="detail_transaksi"
-          :fields="fields_detail_transaksi"
-        >
-        </b-table>
-        <div class="text-right">
+        <!-- <b-table :items="detail_transaksi"> </b-table> -->
+        <table class="table">
+          <tr>
+            <td>#</td>
+            <td>Jenis Paket</td>
+            <td>Berat</td>
+            <td>Sub Total</td>
+          </tr>
+          <tr v-for="(det, index) in detail_transaksi" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ det.jenis_paket }}</td>
+            <td>{{ det.berat }}</td>
+            <td>{{ det.sub_total }}</td>
+          </tr>
+        </table>
+        <div class="text-right text-danger font-weight-bold">
           <h4>Total: Rp{{ total }}</h4>
         </div>
       </div>
     </b-modal>
 
-    <b-modal
+    <!-- <b-modal
       id="modal-recipe"
       ref="modal"
       title="Nota Pemesanan"
@@ -158,18 +183,12 @@
       hide-footer="true"
     >
       <div class="table-responsive">
-        <b-table
-          striped
-          hover
-          :items="detail_transaksi"
-          :fields="fields_detail_transaksi"
-        >
-        </b-table>
+        <b-table striped hover :items="detail_transaksi"> </b-table>
         <div class="text-right">
           <h4>Total: Rp{{ total }}</h4>
         </div>
       </div>
-    </b-modal>
+    </b-modal> -->
   </div>
 </template>
 
@@ -196,6 +215,7 @@ module.exports = {
       list_months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     };
   },
+
   methods: {
     getData: function () {
       let config = {
@@ -203,11 +223,13 @@ module.exports = {
           Authorization: "Bearer " + this.$cookies.get("Authorization"),
         },
       };
+
       let form = {
         tahun: this.tahun,
         bulan: this.bulan,
         tanggal: this.tanggal,
       };
+
       axios
         .post(base_url + "/transaksi/report", form, config)
         .then((response) => {
@@ -217,6 +239,7 @@ module.exports = {
           console.log(error);
         });
     },
+
     changeStatus: function (id_transaksi, event) {
       let conf = {
         headers: {
@@ -225,57 +248,67 @@ module.exports = {
       };
       let form = {
         id_transaksi: id_transaksi,
-        status: event.target.value,
+        status_cucian: event.target.value,
       };
+
       axios
         .put(base_url + "/transaksi/status", form, conf)
         .then((response) => {
           this.getData();
-          Swal.fire(response.data.message);
+          alert(response.data.message);
         })
         .catch((error) => {
           console.log(error);
         });
     },
+
     changeBayar: function (id_transaksi, event) {
       let conf = {
         headers: {
           Authorization: "Bearer " + this.$cookies.get("Authorization"),
         },
       };
+
       let form = {
         id_transaksi: id_transaksi,
         status_pembayaran: event.target.value,
       };
+
       axios
         .put(base_url + "/transaksi/bayar", form, conf)
         .then((response) => {
           this.getData();
-          Swal.fire(response.data.message);
+
+          alert(response.data.message);
         })
         .catch((error) => {
           console.log(error);
         });
     },
+
     detail: function (detail_transaksi, total) {
       this.total = total;
       this.detail_transaksi = detail_transaksi;
     },
+
     cetak: function () {
       const prtHtml = document.getElementById("print").innerHTML;
-      //console.log(prtHtml);
+
       let stylesHtml = "";
       for (const node of [
         ...document.querySelectorAll('link[rel="stylesheet"], style'),
       ]) {
         stylesHtml += node.outerHTML;
       }
+
       const WinPrint = window.open(
         "",
         "",
         "left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
       );
-      WinPrint.document.write(`<!DOCTYPE html>
+
+      WinPrint.document.write(`
+        <!DOCTYPE html>
         <html>
           <head>
           <link rel="stylesheet" href="src/assets/css/bootstrap.min.css">
@@ -284,13 +317,15 @@ module.exports = {
           <body>
             ${prtHtml}
           </body>
-        </html>`);
+        </html>
+      `);
       WinPrint.document.close();
       WinPrint.focus();
       WinPrint.print();
       WinPrint.close();
     },
   },
+
   mounted() {
     this.getData();
   },
