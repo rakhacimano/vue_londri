@@ -5,7 +5,7 @@
       <div class="card mt-4 mb-4">
         <div class="card-body">
           <!-- Cause Enum Column for Jenis Paket, Add Button Disabled -->
-          <a
+          <!-- <a
             v-b-modal.modal_paket
             href="#"
             class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
@@ -15,7 +15,8 @@
               <i class="fas fa-plus"></i>
             </span>
             <span class="text">Tambah</span>
-          </a>
+          </a> -->
+          
           <div class="table-responsive">
             <table
               class="table table-bordered"
@@ -114,6 +115,7 @@
         </div>
       </form>
     </b-modal>
+
   </div>
 </template>
 <script>

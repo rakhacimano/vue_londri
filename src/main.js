@@ -37,6 +37,11 @@ var router = [
     name: "TambahTransaksi",
     component: httpVueLoader("./src/components/TambahTransaksi.vue"),
   },
+  {
+    path: "/transaksi-sample",
+    name: "TransaksiSample",
+    component: httpVueLoader("./src/components/TransaksiSample.vue"),
+  },
 ];
 
 var routers = new VueRouter({

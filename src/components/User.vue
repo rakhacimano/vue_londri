@@ -1,20 +1,22 @@
 <template>
   <div>
     <main>
-      <h1 class="h3 mb-0 text-gray-800">User</h1>
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0 text-gray-800">User</h1>
+        <a
+          v-b-modal.modal_user
+          href="#"
+          class="btn bg-gradient-primary btn-icon-split text-light mr-2"
+          @click="Add"
+        >
+          <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span class="text">Tambah</span>
+        </a>
+      </div>
       <div class="card mt-4 mb-4">
         <div class="card-body">
-          <a
-            v-b-modal.modal_user
-            href="#"
-            class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
-            @click="Add"
-          >
-            <span class="icon text-white-50">
-              <i class="fas fa-plus"></i>
-            </span>
-            <span class="text">Tambah</span>
-          </a>
           <div class="table-responsive">
             <table
               class="table table-bordered"

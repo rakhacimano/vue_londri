@@ -69,6 +69,13 @@
             <span>Transaksi</span>
           </router-link>
         </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link" to="/transaksi-sample" v-if="role === 'admin'">
+            <i class="fas fa-info-circle"></i>
+            <span>Transaksi Sample</span>
+          </router-link>
+        </li>
         
       </ul>
       <!-- End of Sidebar -->
