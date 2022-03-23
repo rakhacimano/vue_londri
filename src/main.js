@@ -28,17 +28,12 @@ var router = [
     component: httpVueLoader("./src/components/User.vue"),
   },
   {
-    path: "/transaksi",
-    name: "Transaksi",
-    component: httpVueLoader("./src/components/Transaksi.vue"),
-  },
-  {
     path: "/tambah-transaksi",
     name: "TambahTransaksi",
     component: httpVueLoader("./src/components/TambahTransaksi.vue"),
   },
   {
-    path: "/transaksi-sample",
+    path: "/transaksi",
     name: "TransaksiSample",
     component: httpVueLoader("./src/components/TransaksiSample.vue"),
   },

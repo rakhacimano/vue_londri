@@ -1,24 +1,33 @@
 <template>
-  <div id="input-palanggaran">
-    <div class="content-wrapper">
-      <div class="row">
+  <div>
+    <main>
+      <h1 class="h3 mb-0 text-gray-800">Paket</h1>
+      <div class="row mt-4 mb-4">
         <div class="col-lg-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <p class="card-title float-left"><b>Input Transaksi</b></p>
+              <h1 class="h5 mb-4 text-gray-800 font-weight-bold">
+                Input Transaksi
+              </h1>
               <div class="table-responsive">
-                <div class="form-group">
-                  <label class="col-form-label">Member</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
                   <b-form-select
                     class="form-control"
                     v-model="id_member"
                     :options="data_member"
                   ></b-form-select>
                 </div>
-                <div class="form-group">
-                  <label for="tanggal" class="col-form-label"
-                    >Tanggal Transaksi</label
-                  >
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
                   <input
                     type="date"
                     class="form-control"
@@ -26,14 +35,16 @@
                     v-model="tanggal"
                   />
                 </div>
-                <div class="form-group">
-                  <label for="lama_pengerjaan" class="col-form-label"
-                    >Lama Pengerjaan</label
-                  >
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
                   <input
                     type="number"
                     class="form-control"
-                    placeholder="Lama Pengerjaan"
+                    placeholder="Lama Pembayaran"
                     v-model="lama_pengerjaan"
                   />
                 </div>
@@ -93,17 +104,12 @@
                   variant="success"
                   >Submit</b-button
                 >
-
-                <!-- toast untuk tampilan message box -->
-                <b-toast id="message" title="Message">
-                  <strong class="text-success">{{ message }}</strong>
-                </b-toast>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -142,8 +148,8 @@ module.exports = {
 
     getPaketDropdown: function () {
       //ambil data paket untuk dropdown
-      let conf = { headers: { Authorization: "Bearer " + this.key } };
-      axios.get(base_url + "/paket", conf).then((response) => {
+      let config = { headers: { Authorization: "Bearer " + this.key } };
+      axios.get(base_url + "/paket", config).then((response) => {
         let json_paket = response.data.data.paket;
         let list_paket = [{ value: "", text: "-- Pilih Paket --" }];
         json_paket.forEach((element) => {
@@ -158,8 +164,8 @@ module.exports = {
 
     getMemberDropdown: function () {
       //ambil data member untuk dropdown
-      let conf = { headers: { Authorization: "Bearer " + this.key } };
-      axios.get(base_url + "/member", conf).then((response) => {
+      let config = { headers: { Authorization: "Bearer " + this.key } };
+      axios.get(base_url + "/member", config).then((response) => {
         let json_member = response.data.data.member;
         let list_member = [];
         json_member.forEach((element) => {
@@ -170,9 +176,9 @@ module.exports = {
     },
 
     Save: function () {
-      let conf = { headers: { Authorization: "Bearer " + this.key } };
+      let config = { headers: { Authorization: "Bearer " + this.key } };
       //get id user
-      axios.get(base_url + "/user/login/check", conf).then((response) => {
+      axios.get(base_url + "/user/login/check", config).then((response) => {
         if (response.data.success == false) {
           this.componentName = "login";
           window.location = front_url;
@@ -189,7 +195,7 @@ module.exports = {
           };
 
           axios
-            .post(base_url + "/transaksi", form, conf)
+            .post(base_url + "/transaksi", form, config)
             .then((response2) => {
               if (response2.data.success == true) {
                 this.message = response2.data.message;
@@ -199,7 +205,8 @@ module.exports = {
                 this.tanggal = "";
                 this.lama_pengerjaan = "";
                 this.detail_transaksi = [];
-                
+
+                alert(response2.data.message)
               } else {
                 this.message = "Pastikan data terisi lengkap!.";
               }

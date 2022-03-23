@@ -2,8 +2,9 @@
   <div>
     <main>
       <div class="d-flex justify-content-between align-items-center">
-        <h1 class="h3 mb-0 text-gray-800">Outlet</h1>
+        <h1 class="h3 mb-0 text-gray-800">Transaksi</h1>
         <router-link
+          v-if="role === 'admin' || 'kasir'"
           to="/tambah-transaksi"
           class="btn bg-gradient-primary btn-icon-split text-light mr-2"
         >
@@ -69,6 +70,7 @@
                 <select
                   class="form-control"
                   id="form_control_status_pembayaran"
+                  :disabled="role === 'owner'"
                   @change="changeStatus(saksi.id_transaksi, $event)"
                 >
                   <option
@@ -100,6 +102,7 @@
               </td>
               <td>
                 <select
+                  :disabled="role === 'owner'"
                   class="form-control"
                   @change="changeBayar(saksi.id_transaksi, $event)"
                 >
@@ -144,6 +147,7 @@
       hide-footer="true"
     >
       <a
+        v-if="role === 'kasir'"
         href="#"
         @click="cetak()"
         class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
@@ -153,14 +157,14 @@
         </span>
         <span class="text">Print Struk</span>
       </a>
-      <div class="table-responsive table table-stripped" id="print">
+      <div class="table-responsive table table-bordered" id="printed">
         <!-- <b-table :items="detail_transaksi"> </b-table> -->
         <table class="table">
           <tr>
-            <td>#</td>
-            <td>Jenis Paket</td>
-            <td>Berat</td>
-            <td>Sub Total</td>
+            <th>#</th>
+            <th>Jenis Paket</th>
+            <th>Berat</th>
+            <th>Sub Total</th>
           </tr>
           <tr v-for="(det, index) in detail_transaksi" :key="index">
             <td>{{ index + 1 }}</td>
@@ -168,10 +172,13 @@
             <td>{{ det.berat }}</td>
             <td>{{ det.sub_total }}</td>
           </tr>
+          <tr>
+            <td colspan="3" class="h3 text-gray-900">Total</td>
+            <td class="h3 text-danger font-weight-bold text-danger">
+              Rp {{ total }}
+            </td>
+          </tr>
         </table>
-        <div class="text-right text-danger font-weight-bold">
-          <h4>Total: Rp{{ total }}</h4>
-        </div>
       </div>
     </b-modal>
 
@@ -196,6 +203,7 @@
 module.exports = {
   data: function () {
     return {
+      role: "",
       id_transaksi: "",
       nama_member: "",
       tanggal: "",
@@ -227,7 +235,6 @@ module.exports = {
       let form = {
         tahun: this.tahun,
         bulan: this.bulan,
-        tanggal: this.tanggal,
       };
 
       axios
@@ -239,6 +246,22 @@ module.exports = {
           console.log(error);
         });
     },
+    
+    getInfo: function () {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.$cookies.get("Authorization"),
+        },
+      };
+
+      axios.get(base_url + "/user/login/check", config).then((response) => {
+        if (response.data.success == true) {
+          this.role = response.data.data.role;
+
+          console.log(response.data.data.role)
+        }
+      });
+    },
 
     changeStatus: function (id_transaksi, event) {
       let conf = {
@@ -246,6 +269,7 @@ module.exports = {
           Authorization: "Bearer " + this.$cookies.get("Authorization"),
         },
       };
+
       let form = {
         id_transaksi: id_transaksi,
         status_cucian: event.target.value,
@@ -292,7 +316,7 @@ module.exports = {
     },
 
     cetak: function () {
-      const prtHtml = document.getElementById("print").innerHTML;
+      const prtHtml = document.getElementById("printed").innerHTML;
 
       let stylesHtml = "";
       for (const node of [
@@ -304,29 +328,30 @@ module.exports = {
       const WinPrint = window.open(
         "",
         "",
-        "left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
+        "left=300,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
       );
 
       WinPrint.document.write(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-          <link rel="stylesheet" href="src/assets/css/bootstrap.min.css">
-            
-          </head>
-          <body>
-            ${prtHtml}
-          </body>
-        </html>
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        </head>
+        <body>
+          ${prtHtml}
+        </body>
+      </html>
       `);
       WinPrint.document.close();
       WinPrint.focus();
       WinPrint.print();
-      WinPrint.close();
+      //WinPrint.close();
     },
   },
 
   mounted() {
+    this.getInfo();
     this.getData();
   },
 };

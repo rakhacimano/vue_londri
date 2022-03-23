@@ -36,7 +36,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-          <router-link class="nav-link" to="/member" v-if="role === 'admin'">
+          <router-link class="nav-link" to="/member" v-if="role !== 'owner'">
             <i class="fas fa-users"></i>
             <span>Member</span>
           </router-link>
@@ -62,18 +62,11 @@
             <span>User</span>
           </router-link>
         </li>
-
+    
         <li class="nav-item">
-          <router-link class="nav-link" to="/transaksi" v-if="role === 'admin'">
+          <router-link class="nav-link" to="/transaksi">
             <i class="fas fa-info-circle"></i>
             <span>Transaksi</span>
-          </router-link>
-        </li>
-
-        <li class="nav-item">
-          <router-link class="nav-link" to="/transaksi-sample" v-if="role === 'admin'">
-            <i class="fas fa-info-circle"></i>
-            <span>Transaksi Sample</span>
           </router-link>
         </li>
         

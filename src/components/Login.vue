@@ -14,7 +14,7 @@
                     <p class="mb-4">
                       Login kembali untuk dapat mengakses Londri!
                     </p>
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-info" role="alert">
                       <strong>{{ message }}</strong>
                     </div>
                   </div>
@@ -61,7 +61,7 @@ module.exports = {
     return {
       username: "",
       password: "",
-      message: "Login Yuk",
+      message: "Login Bro",
       success: "",
     };
   },
