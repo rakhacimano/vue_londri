@@ -235,9 +235,6 @@ module.exports = {
           .then(response2 => {
             if(response2.data.success == true){
               this.nama_outlet = response2.data.data.nama_outlet;
-
-              console.log(response.data.data.id_outlet)
-              console.log(response2.data.data.nama_outlet)
             }
           })
           .catch(error => {

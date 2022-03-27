@@ -157,45 +157,28 @@
         </span>
         <span class="text">Print Struk</span>
       </a>
-      <div class="table-responsive table table-bordered" id="printed">
-        <!-- <b-table :items="detail_transaksi"> </b-table> -->
-        <table class="table">
-          <tr>
-            <th>#</th>
-            <th>Jenis Paket</th>
-            <th>Berat</th>
-            <th>Sub Total</th>
-          </tr>
-          <tr v-for="(det, index) in detail_transaksi" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>{{ det.jenis_paket }}</td>
-            <td>{{ det.berat }}</td>
-            <td>{{ det.sub_total }}</td>
-          </tr>
-          <tr>
-            <td colspan="3" class="h3 text-gray-900">Total</td>
-            <td class="h3 text-danger font-weight-bold text-danger">
-              Rp {{ total }}
-            </td>
-          </tr>
-        </table>
-      </div>
+      <!-- <b-table :items="detail_transaksi"> </b-table> -->
+      <table class="table table-bordered" id="printed">
+        <tr>
+          <th>#</th>
+          <th>Jenis Paket</th>
+          <th>Berat</th>
+          <th>Sub Total</th>
+        </tr>
+        <tr v-for="(det, index) in detail_transaksi" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ det.jenis_paket }}</td>
+          <td>{{ det.berat }}</td>
+          <td>{{ det.sub_total }}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="h3 text-gray-900">Total</td>
+          <td class="h3 text-danger font-weight-bold text-danger">
+            Rp {{ total }}
+          </td>
+        </tr>
+      </table>
     </b-modal>
-
-    <!-- <b-modal
-      id="modal-recipe"
-      ref="modal"
-      title="Nota Pemesanan"
-      size="md"
-      hide-footer="true"
-    >
-      <div class="table-responsive">
-        <b-table striped hover :items="detail_transaksi"> </b-table>
-        <div class="text-right">
-          <h4>Total: Rp{{ total }}</h4>
-        </div>
-      </div>
-    </b-modal> -->
   </div>
 </template>
 
@@ -246,7 +229,7 @@ module.exports = {
           console.log(error);
         });
     },
-    
+
     getInfo: function () {
       let config = {
         headers: {
@@ -258,7 +241,7 @@ module.exports = {
         if (response.data.success == true) {
           this.role = response.data.data.role;
 
-          console.log(response.data.data.role)
+          console.log(response.data.data.role);
         }
       });
     },

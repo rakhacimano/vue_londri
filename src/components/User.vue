@@ -49,7 +49,12 @@
                   <td>{{ index + 1 }}</td>
                   <td>{{ ser.nama }}</td>
                   <td>{{ ser.username }}</td>
-                  <td>{{ ser.role }}</td>
+                  <td class="text-light">
+                    <!-- {{ ser.role }} -->
+                    <span v-if="ser.role === 'admin'" class="badge bg-gradient-primary p-2">Admin</span>
+                    <span v-if="ser.role === 'kasir'" class="badge bg-gradient-warning p-2">Kasir</span>
+                    <span v-if="ser.role === 'owner'" class="badge bg-gradient-success p-2">Owner</span>
+                  </td>
                   <td>{{ ser.id_outlet }}</td>
                   <td>
                     <a
@@ -169,6 +174,7 @@ module.exports = {
   data: function () {
     return {
       id_outlet: "",
+      nama_outlet: "",
       nama: "",
       username: "",
       password: "",
@@ -186,6 +192,7 @@ module.exports = {
           Authorization: "Bearer " + this.$cookies.get("Authorization"),
         },
       };
+
       axios.get(base_url + "/user", config).then((response) => {
         console.log(response);
         if (response.data.success == true) {
@@ -247,6 +254,7 @@ module.exports = {
         nama: this.nama,
         username: this.username,
         password: this.password,
+        nama_outlet: this.nama_outlet,
         role: this.role,
       };
       if (this.action == "insert") {

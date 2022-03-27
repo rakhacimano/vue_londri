@@ -52,12 +52,12 @@
                   <td class="text-white">
                     <span
                       v-if="mem.jenis_kelamin === 'l'"
-                      class="badge bg-gradient-primary"
+                      class="badge bg-gradient-primary p-2"
                       >Laki-Laki</span
                     >
                     <span
                       v-if="mem.jenis_kelamin === 'p'"
-                      class="badge bg-danger"
+                      class="badge bg-gradient-danger p-2"
                       >Perempuan</span
                     >
                   </td>

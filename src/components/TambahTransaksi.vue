@@ -25,7 +25,7 @@
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">
-                      <i class="fas fa-user"></i>
+                      <i class="fas fa-calendar"></i>
                     </span>
                   </div>
                   <input
@@ -35,10 +35,10 @@
                     v-model="tanggal"
                   />
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">
-                      <i class="fas fa-user"></i>
+                      <i class="fas fa-clock"></i>
                     </span>
                   </div>
                   <input
@@ -52,14 +52,20 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 grid-margin stretch-card">
+        <div class="col-md-6 grid-margin">
           <div class="card">
             <div class="card-body">
-              <div class="table-responsive">
-                <b-button @click="addItem" size="sm" variant="warning"
-                  ><i class="mdi mdi-plus btn-icon-prepend"></i> Tambah
-                  Item</b-button
+              <div>
+                <a
+                  href="#"
+                  class="btn bg-gradient-warning btn-icon-split text-light"
+                  @click="addItem"
                 >
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Tambah</span>
+                </a>
                 <br /><br />
                 <div
                   class="row"
@@ -68,14 +74,17 @@
                 >
                   <br /><br />
                   <div class="col-md-2">
-                    <b-button
-                      variant="danger"
-                      size="sm"
+                    <a
+                      href="#"
+                      class="btn btn-outline-danger"
                       @click="deleteItem(counter)"
-                      >Hapus</b-button
                     >
+                      <span class="icon">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                    </a>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-5">
                     <div class="form-group">
                       <b-form-select
                         class="form-control"
@@ -84,7 +93,7 @@
                       ></b-form-select>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-5">
                     <div class="form-group">
                       <input
                         class="form-control"
@@ -95,16 +104,17 @@
                     </div>
                   </div>
                 </div>
-                <br /><br />
-                <b-button
-                  @click="Save"
-                  block
-                  squared
-                  size="lg"
-                  variant="success"
-                  >Submit</b-button
-                >
               </div>
+              <a
+                href="#"
+                class="btn bg-gradient-primary text-light btn-block text-center"
+                @click="Save"
+              >
+                <span class="icon text-white mr-2">
+                  <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Buat Transaksi</span>
+              </a>
             </div>
           </div>
         </div>
@@ -167,7 +177,7 @@ module.exports = {
       let config = { headers: { Authorization: "Bearer " + this.key } };
       axios.get(base_url + "/member", config).then((response) => {
         let json_member = response.data.data.member;
-        let list_member = [];
+        let list_member = [{ value: "", text: "-- Pilih Member --" }];
         json_member.forEach((element) => {
           list_member.push({ value: element.id_member, text: element.nama });
         });
@@ -206,7 +216,7 @@ module.exports = {
                 this.lama_pengerjaan = "";
                 this.detail_transaksi = [];
 
-                alert(response2.data.message)
+                alert(response2.data.message);
               } else {
                 this.message = "Pastikan data terisi lengkap!.";
               }
