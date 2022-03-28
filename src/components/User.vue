@@ -55,7 +55,7 @@
                     <span v-if="ser.role === 'kasir'" class="badge bg-gradient-warning p-2">Kasir</span>
                     <span v-if="ser.role === 'owner'" class="badge bg-gradient-success p-2">Owner</span>
                   </td>
-                  <td>{{ ser.id_outlet }}</td>
+                  <td>{{ ser.outlet.nama_outlet }}</td>
                   <td>
                     <a
                       v-b-modal.modal_user
@@ -182,7 +182,6 @@ module.exports = {
       action: "",
       user: [],
       data_outlet: [],
-      fields: ["id", "nama", "username", "role", "outlet", "aksi"],
     };
   },
   methods: {
@@ -198,6 +197,8 @@ module.exports = {
         if (response.data.success == true) {
           this.user = response.data.data.users;
         }
+        
+        console.log(response.data.data.count)
       });
     },
     OutletDropdown: function () {
