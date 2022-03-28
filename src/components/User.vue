@@ -197,8 +197,6 @@ module.exports = {
         if (response.data.success == true) {
           this.user = response.data.data.users;
         }
-        
-        console.log(response.data.data.count)
       });
     },
     OutletDropdown: function () {

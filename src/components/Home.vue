@@ -12,10 +12,10 @@
                 <div
                   class="text-xs font-weight-bold text-primary text-uppercase mb-1"
                 >
-                  Data Paket
+                  Data Member
                 </div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  $40,000
+                  {{ member.length }} Member
                 </div>
               </div>
               <div class="col-auto">
@@ -36,7 +36,7 @@
                   Data Outlet
                 </div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  $215,000
+                  {{ outlet.length }} Outlet
                 </div>
               </div>
               <div class="col-auto">
@@ -54,26 +54,10 @@
                 <div
                   class="text-xs font-weight-bold text-info text-uppercase mb-1"
                 >
-                  Data Member
+                  Data Paket
                 </div>
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                      50%
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="progress progress-sm mr-2">
-                      <div
-                        class="progress-bar bg-info"
-                        role="progressbar"
-                        style="width: 50%"
-                        aria-valuenow="50"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      ></div>
-                    </div>
-                  </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{ paket.length }} Paket
                 </div>
               </div>
               <div class="col-auto">
@@ -93,7 +77,9 @@
                 >
                   Data User
                 </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{ user.length }} Pengguna
+                </div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -106,5 +92,86 @@
   </div>
 </template>
 <script>
-module.exports = {};
+module.exports = {
+  data: function () {
+    return {
+      member: [],
+      paket: [],
+      outlet: [],
+      user: [],
+    };
+  },
+
+  methods: {
+    // GET DATA OUTLET
+    getDataOutlet: function () {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.$cookies.get("Authorization"),
+        },
+      };
+
+      axios.get(base_url + "/outlet", config).then((response) => {
+        console.log(response);
+        if (response.data.success == true) {
+          this.outlet = response.data.data.outlet;
+        }
+      });
+    },
+
+    // GET DATA MEMBER
+    getDataMember: function () {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.$cookies.get("Authorization"),
+        },
+      };
+
+      axios.get(base_url + "/member", config).then((response) => {
+        console.log(response);
+        if (response.data.success == true) {
+          this.member = response.data.data.member;
+        }
+      });
+    },
+
+    // GET DATA PAKET
+    getDataPaket: function () {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.$cookies.get("Authorization"),
+        },
+      };
+
+      axios.get(base_url + "/paket", config).then((response) => {
+        console.log(response);
+        if (response.data.success == true) {
+          this.paket = response.data.data.paket;
+        }
+      });
+    },
+
+    getDataUser: function () {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.$cookies.get("Authorization"),
+        },
+      };
+
+      axios.get(base_url + "/user", config).then((response) => {
+        console.log(response);
+        if (response.data.success == true) {
+          this.user = response.data.data.users;
+        }
+      });
+    },
+  },
+
+  mounted() {
+    this.getDataMember();
+    this.getDataPaket();
+    this.getDataOutlet();
+    this.getDataUser();
+  },
+};
 </script>

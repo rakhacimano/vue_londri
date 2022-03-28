@@ -61,7 +61,7 @@ module.exports = {
     return {
       username: "",
       password: "",
-      message: "Login Bro",
+      message: "Yuk Login",
       success: "",
     };
   },

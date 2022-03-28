@@ -245,54 +245,6 @@ module.exports = {
       
     },
 
-    // GET DATA OUTLET
-    getDataOutlet: function () {
-      let config = {
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("Authorization"),
-        },
-      };
-
-      axios.get(base_url + "/outlet", config).then((response) => {
-        console.log(response);
-        if (response.data.success == true) {
-          this.outlet = response.data.data.outlet;
-        }
-      });
-    },
-
-    // GET DATA MEMBER
-    getDataMember: function () {
-      let config = {
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("Authorization"),
-        },
-      };
-
-      axios.get(base_url + "/member", config).then((response) => {
-        console.log(response);
-        if (response.data.success == true) {
-          this.member = response.data.data.member;
-        }
-      });
-    },
-
-    // GET DATA PAKET
-    getData: function () {
-      let config = {
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("Authorization"),
-        },
-      };
-
-      axios.get(base_url + "/paket", config).then((response) => {
-        console.log(response);
-        if (response.data.success == true) {
-          this.paket = response.data.data.paket;
-        }
-      });
-    },
-
     Logout: function () {
       this.$cookies.remove("Authorization");
       this.componentName = "login";
