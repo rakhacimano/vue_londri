@@ -65,7 +65,7 @@
     
         <li class="nav-item">
           <router-link class="nav-link" to="/transaksi">
-            <i class="fas fa-info-circle"></i>
+            <i class="fas fa-cash-register"></i>
             <span>Transaksi</span>
           </router-link>
         </li>
