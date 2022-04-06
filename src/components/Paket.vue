@@ -4,8 +4,9 @@
       <h1 class="h3 mb-0 text-gray-800">Paket</h1>
       <div class="card mt-4 mb-4">
         <div class="card-body">
+          
           <!-- Cause Enum Column for Jenis Paket, Add Button Disabled -->
-          <a
+          <!-- <a
             v-b-modal.modal_paket
             href="#"
             class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
@@ -15,8 +16,8 @@
               <i class="fas fa-plus"></i>
             </span>
             <span class="text">Tambah</span>
-          </a>
-          
+          </a> -->
+
           <div class="table-responsive">
             <table
               class="table table-bordered"
@@ -47,7 +48,9 @@
                     <span v-if="ket.jenis_paket === 'kiloan'">Kiloan</span>
                     <span v-if="ket.jenis_paket === 'kaos'">Kaos</span>
                     <span v-if="ket.jenis_paket === 'boneka'">Boneka</span>
-                    <span v-if="ket.jenis_paket === 'bed_cover'">Bed Cover</span>
+                    <span v-if="ket.jenis_paket === 'bed_cover'"
+                      >Bed Cover</span
+                    >
                   </td>
                   <td>{{ ket.harga }}</td>
                   <td>
@@ -120,7 +123,6 @@
         </div>
       </form>
     </b-modal>
-
   </div>
 </template>
 <script>

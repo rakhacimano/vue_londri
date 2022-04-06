@@ -51,9 +51,21 @@
                   <td>{{ ser.username }}</td>
                   <td class="text-light">
                     <!-- {{ ser.role }} -->
-                    <span v-if="ser.role === 'admin'" class="badge bg-gradient-primary p-2">Admin</span>
-                    <span v-if="ser.role === 'kasir'" class="badge bg-gradient-warning p-2">Kasir</span>
-                    <span v-if="ser.role === 'owner'" class="badge bg-gradient-success p-2">Owner</span>
+                    <span
+                      v-if="ser.role === 'admin'"
+                      class="badge bg-gradient-primary p-2"
+                      >Admin</span
+                    >
+                    <span
+                      v-if="ser.role === 'kasir'"
+                      class="badge bg-gradient-warning p-2"
+                      >Kasir</span
+                    >
+                    <span
+                      v-if="ser.role === 'owner'"
+                      class="badge bg-gradient-success p-2"
+                      >Owner</span
+                    >
                   </td>
                   <td>{{ ser.outlet.nama_outlet }}</td>
                   <td>
@@ -145,12 +157,12 @@
               <i class="fas fa-user-tag"></i>
             </span>
           </div>
-          <select v-model="role" class="form-control">
+          <b-form-select v-model="role" class="form-control">
             <option value="">--Pilih Role---</option>
             <option value="admin">Admin</option>
             <option value="owner">Owner</option>
             <option value="kasir">Kasir</option>
-          </select>
+          </b-form-select>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">

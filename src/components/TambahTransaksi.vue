@@ -44,7 +44,7 @@
                   <input
                     type="number"
                     class="form-control"
-                    placeholder="Lama Pembayaran"
+                    placeholder="Lama Pengerjaan"
                     v-model="lama_pengerjaan"
                   />
                 </div>
@@ -217,6 +217,8 @@ module.exports = {
                 this.detail_transaksi = [];
 
                 alert(response2.data.message);
+
+                this.$router.push('/transaksi')
               } else {
                 this.message = "Pastikan data terisi lengkap!.";
               }

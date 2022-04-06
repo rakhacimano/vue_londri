@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h1 class="h3 mb-0 text-gray-800">Transaksi</h1>
         <router-link
-          v-if="role === 'admin' || 'kasir'"
+          v-if="role !== 'owner'"
           to="/tambah-transaksi"
           class="btn bg-gradient-primary btn-icon-split text-light mr-2"
         >
@@ -146,17 +146,24 @@
       size="lg"
       hide-footer="true"
     >
-      <a
-        v-if="role === 'kasir'"
-        href="#"
-        @click="cetak()"
-        class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
-      >
-        <span class="icon text-white-50">
-          <i class="fas fa-print"></i>
-        </span>
-        <span class="text">Print Struk</span>
-      </a>
+      <div class="d-flex justify-content-between align-items-center">
+        <a
+          href="#"
+          @click="cetak()"
+          class="btn bg-gradient-primary btn-icon-split text-light mr-2 mb-3"
+        >
+          <span class="icon text-white-50">
+            <i class="fas fa-print"></i>
+          </span>
+          <span class="text">Print Struk</span>
+        </a>
+
+        <p class="font-weight-bold">
+          Kasir :
+          <span class="badge bg-gradient-primary text-light">{{ nama }}</span>
+        </p>
+      </div>
+
       <!-- <b-table :items="detail_transaksi"> </b-table> -->
       <table class="table table-bordered" id="printed">
         <tr>
@@ -189,6 +196,9 @@ module.exports = {
       role: "",
       id_transaksi: "",
       nama_member: "",
+
+      // Nama dari Users
+      nama: "",
       tanggal: "",
       status_cucian: "",
       status_pembayaran: "",
@@ -240,6 +250,7 @@ module.exports = {
       axios.get(base_url + "/user/login/check", config).then((response) => {
         if (response.data.success == true) {
           this.role = response.data.data.role;
+          this.nama = response.data.data.nama;
 
           console.log(response.data.data.role);
         }
@@ -300,36 +311,32 @@ module.exports = {
 
     cetak: function () {
       const prtHtml = document.getElementById("printed").innerHTML;
-
+      //console.log(prtHtml);
       let stylesHtml = "";
       for (const node of [
         ...document.querySelectorAll('link[rel="stylesheet"], style'),
       ]) {
         stylesHtml += node.outerHTML;
       }
-
       const WinPrint = window.open(
         "",
         "",
-        "left=300,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
+        "left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
       );
-
-      WinPrint.document.write(`
-      <!DOCTYPE html>
+      WinPrint.document.write(`<!DOCTYPE html>
       <html>
         <head>
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="src/assets/css/bootstrap.min.css">
 
         </head>
         <body>
           ${prtHtml}
         </body>
-      </html>
-      `);
+      </html>`);
       WinPrint.document.close();
       WinPrint.focus();
       WinPrint.print();
-      //WinPrint.close();
+      WinPrint.close();
     },
   },
 

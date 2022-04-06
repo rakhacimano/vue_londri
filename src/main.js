@@ -34,8 +34,8 @@ var router = [
   },
   {
     path: "/transaksi",
-    name: "TransaksiSample",
-    component: httpVueLoader("./src/components/TransaksiSample.vue"),
+    name: "Transaksi",
+    component: httpVueLoader("./src/components/Transaksi.vue"),
   },
 ];
 
