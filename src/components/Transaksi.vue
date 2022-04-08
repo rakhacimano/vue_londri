@@ -163,6 +163,22 @@
       <div class="table-responsive" id="printed">
         <table class="table table-bordered">
           <tr>
+            <th colspan="4" class="d-flex align-items-center">
+              <div class="sidebar-brand-icon">
+                <img
+                  class="outlet-logo"
+                  src="src/assets/img/Logo-Filled.svg"
+                  alt="Logo Londri"
+                />
+              </div>
+              <div class="sidebar-brand-text mx-2">
+                <h3 class="h5 mb-0 text-gray-900 font-weight-bold">
+                  {{ nama_outlet }}
+                </h3>
+              </div>
+            </th>
+          </tr>
+          <tr>
             <th class="text-gray-900 h5" colspan="3">Kasir</th>
             <th>
               <span class="badge bg-gradient-primary text-light p-2">{{
@@ -201,6 +217,7 @@ module.exports = {
       role: "",
       id_transaksi: "",
       nama_member: "",
+      nama_outlet: "",
 
       // Nama dari Users
       nama: "",
@@ -258,6 +275,18 @@ module.exports = {
           this.nama = response.data.data.nama;
 
           console.log(response.data.data.role);
+
+          // This axios refers to get nama_outlet in Outlet Table
+          axios
+            .get(base_url + "/outlet/" + response.data.data.id_outlet, config)
+            .then((response2) => {
+              if (response2.data.success == true) {
+                this.nama_outlet = response2.data.data.nama_outlet;
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
       });
     },
