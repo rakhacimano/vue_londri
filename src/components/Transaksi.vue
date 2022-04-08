@@ -157,34 +157,39 @@
           </span>
           <span class="text">Print Struk</span>
         </a>
-
-        <p class="font-weight-bold">
-          Kasir :
-          <span class="badge bg-gradient-primary text-light">{{ nama }}</span>
-        </p>
       </div>
 
       <!-- <b-table :items="detail_transaksi"> </b-table> -->
-      <table class="table table-bordered" id="printed">
-        <tr>
-          <th>#</th>
-          <th>Jenis Paket</th>
-          <th>Berat</th>
-          <th>Sub Total</th>
-        </tr>
-        <tr v-for="(det, index) in detail_transaksi" :key="index">
-          <td>{{ index + 1 }}</td>
-          <td>{{ det.jenis_paket }}</td>
-          <td>{{ det.berat }}</td>
-          <td>{{ det.sub_total }}</td>
-        </tr>
-        <tr>
-          <td colspan="3" class="h3 text-gray-900">Total</td>
-          <td class="h3 text-danger font-weight-bold text-danger">
-            Rp {{ total }}
-          </td>
-        </tr>
-      </table>
+      <div class="table-responsive" id="printed">
+        <table class="table table-bordered">
+          <tr>
+            <th class="text-gray-900 h5" colspan="3">Kasir</th>
+            <th>
+              <span class="badge bg-gradient-primary text-light p-2">{{
+                nama
+              }}</span>
+            </th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Jenis Paket</th>
+            <th>Berat</th>
+            <th>Sub Total</th>
+          </tr>
+          <tr v-for="(det, index) in detail_transaksi" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ det.jenis_paket }}</td>
+            <td>{{ det.berat }}</td>
+            <td>{{ det.sub_total }}</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="h3 text-gray-900">Total</td>
+            <td class="h3 text-danger font-weight-bold text-danger">
+              Rp {{ total }}
+            </td>
+          </tr>
+        </table>
+      </div>
     </b-modal>
   </div>
 </template>
